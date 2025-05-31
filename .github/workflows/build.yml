@@ -22,8 +22,18 @@ jobs:
     container: node:20
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+
+      - name: Install git
+        run: |
+          apt-get update
+          apt-get install -y git
+
+      - name: Configure git safe directory
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
       - name: Install dependencies
