@@ -30,12 +30,11 @@ jobs:
         run: npm install
 
       # Cambiamos el paso Test por jest-github-action
-      - name: Test with Coverage
-        uses: mattallty/jest-github-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Jest coverage report
+        uses: ArtiomTr/jest-coverage-report-action@v2.3.1
         with:
-          test-command: "npm run coverage-jenkins"
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          test-script: npm run coverage-jenkins
 
       # Subimos toda la carpeta coverage como artifact
       - name: Upload coverage artifact
